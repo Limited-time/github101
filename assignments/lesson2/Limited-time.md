@@ -12,13 +12,43 @@
 
 ## 2. 遇到的问题及解决方法
 
-暂无
+Limited-time.assets文件夹上传不上来，于是图片渲染失败，而过程中GitHub仓修改和本地仓修改冲突
+
+报错：
+ error: Pulling is not possible because you have unmerged files 错误，核心是 Git 仓库里存在 “未完成合并” 的文件，这些文件卡住了合并 / 拉取流程，导致无法执行 git pull
+ 
+方法：
+ git merge --abort
+ 
+ 终止未完成的合并（清理异常状态，保留本地文件），执行这个命令，Git 会取消所有未完成的合并操作，完全保留你的图片、MD 文件等本地修改，只清理卡住的合并状态
+ 
+ 然后能正常拉取到本地：git pull origin main
+ 
+ 再从本地推送到GitHub：git push origin main
+ 
+ 期间学到了一个：
+   暂存本地所有修改（保护图片不丢失）：git stash
+   
+   恢复本地修改（把图片 / MD 文件改回来）：git stash pop
+
+以及GitHub图的URL：
+    
+用 GitHub 图片原始链接，100% 显示
+如果改路径后仍不显示，大概率是图片没真的推到 GitHub，或缓存问题，用图片的 GitHub 原始链接最稳妥：
+
+1、打开 GitHub 仓库，找到这个 PNG 文件（进入 lesson2 目录，能看到图片文件）；
+
+2、点击图片文件，再点击右上角的「Raw」按钮（会打开纯图片页面）；
+
+3、复制浏览器地址栏里的链接（比如https://raw.githubusercontent.com/Limited-time/github101/main/assignments/lesson2/image-20251207225727814-1765138698825.png）；
+
+4、把 MD 里的图片代码换成这个链接
 
 ## 3. 版本信息截图
 
 （在此处插入执行`git --version`命令后的截图）
 
-![version`](image-20251207225727814-1765138698825.png)
+![](Limited-time.assets/image-20251207225727814.png)
 
 
 
